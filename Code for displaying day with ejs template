@@ -1,0 +1,71 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const app = express();
+
+app.set("view engine","ejs");
+
+app.get("/" , function(req , res){
+   var today = new Date();
+   var currentDay = today.getDate();
+   var day = "";
+
+  if(currentDay === 1 )
+  {
+    day = "Sunday";
+  }
+  else if(currentDay === 2 )
+  {
+    day = "Tuesday";
+  }
+  else if(currentDay === 3 )
+  {
+    day = "Wednesday";
+  }
+  else if(currentDay === 4 )
+  {
+    day = "Thursday";
+  }
+
+  else if(currentDay === 5 )
+  {
+    day = "Friday";
+  }
+
+  else
+  {
+    day = "Saturday";
+  }
+
+  res.render("list" , {kindOfDay:day});
+
+
+});
+
+
+app.listen(3000 ,function(){
+  console.log("server started at port 3000");
+})
+
+
+
+
+
+list.ejs
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>To Do List</title>
+  </head>
+  <body>
+    <% if(kindOfDay === "Saturday" || kindOfDay === "Sunday") {  %>
+      <h1 style="color:purple">It's a <%= kindOfDay %> ToDo List</h1>
+    <% } else { %>
+      <h1 style="color:blue">It's a <%= kindOfDay %>!</h1>
+    <% } %>
+
+
+  </body>
+</html>
